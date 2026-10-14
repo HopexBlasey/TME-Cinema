@@ -1,23 +1,117 @@
 <div align="center">
 
-# [Abyss](https://aumgupta.github.io/abyss-jellyfin/) for Jellyfin
+# TME+ for Jellyfin
 
-![GitHub License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
-![GitHub Release](https://img.shields.io/github/v/release/AumGupta/abyss-jellyfin?style=for-the-badge)
-![jsDelivr Requests](https://img.shields.io/jsdelivr/gh/hm/AumGupta/abyss-jellyfin?style=for-the-badge&label=Usage&logo=none)
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/AumGupta/abyss-jellyfin/total?style=for-the-badge)](https://github.com/AumGupta/abyss-jellyfin/releases/latest)
+**Your World. Your Entertainment.**
 
-<img alt="Abyss Logo" src="docs/assets/favicon/apple-touch-icon.png" style="width: 72px;">
+TME+ is a premium CSS-first Jellyfin theme with the original **Cinematic
+Obsidian** design system: layered graphite surfaces, a restrained violet
+accent, compact media chrome, and artwork-led discovery.
 
-A clean and minimal theme for Jellyfin with frosted glass surfaces, refined typography, smooth animations and a minimal design language that re-skins JellyFin almost exhaustively. [Video Demo](https://youtu.be/CAjI7qgvJzo)
-
-
-
-<a href="https://aumgupta.github.io/abyss-jellyfin/">
-  <img src="https://img.shields.io/badge/View%20%26%20Install-→-f5f5f7?style=for-the-badge&labelColor=2f2f2f" alt="Install" width=273.5 />
-</a>
+Built on the selector architecture of [Abyss for Jellyfin](https://github.com/AumGupta/abyss-jellyfin).
 
 </div>
+
+> [!IMPORTANT]
+> TME+ is a visual theme. It does not change Jellyfin server configuration,
+> Docker/Unraid setup, authentication, plugins, playback, transcoding, GPU
+> mapping, or media data.
+
+## TME+ installation
+
+### Before publishing this branch
+
+This redesign currently lives on `feature/tme-plus-redesign`. Commit and push
+the branch, then merge it to the branch you intend to deploy before using a
+remote import. Until that happens, use a local Custom CSS import or paste the
+contents of `abyss.css`; do not point Jellyfin at the upstream Abyss URL.
+
+### Jellyfin Custom CSS
+
+In **Dashboard > Branding > Custom CSS**, import the entry file from this fork
+after the redesign has been published to `main`:
+
+```css
+@import url('https://cdn.jsdelivr.net/gh/HopexBlasey/TME-Cinema@main/abyss.css');
+```
+
+Set Jellyfin to its Dark theme. TME+ supports both the Jellyfin 12 Modern UI
+and the Desktop (Legacy) UI selector layers inherited from Abyss. The original
+project lists Jellyfin 12.1.x and 10.11.x as tested upstream; this fork has
+**not** yet been visually verified against a running server, so treat those as
+compatibility targets rather than a TME+ certification.
+
+### Existing UI enhancements
+
+TME+ includes optional, version-specific visual integrations. Add these below
+the base TME+ import only when the matching enhancement is installed:
+
+```css
+/* Jellyfin Enhanced v11.3.0.0 */
+@import url('https://cdn.jsdelivr.net/gh/HopexBlasey/TME-Cinema@main/styles/abyss-je.css');
+
+/* Media Bar Enhanced v1.9.0.0 */
+@import url('https://cdn.jsdelivr.net/gh/HopexBlasey/TME-Cinema@main/styles/abyss-mbe.css');
+```
+
+The styles use only the documented selectors present in this repository:
+`#jellyfin-enhanced-panel`, Jellyfin Enhanced overlay hooks, and Media Bar
+Enhanced's `#slides-container` hooks. They preserve integration functionality;
+they do not add a hero, recommendations, or any data source. Plugin updates may
+rename markup, so re-check these integrations after updating either plugin.
+
+### Customization
+
+Place overrides after the imports. TME+ tokens are centralized at the end of
+`abyss.css` so a violet, corner, or surface change does not require scattered
+selector edits:
+
+```css
+:root {
+  --tme-violet: 156 118 231;
+  --tme-violet-strong: 183 154 255;
+  --tme-radius-md: 14px;
+  --tme-obsidian: 12 13 18;
+}
+```
+
+### Updating and rollback
+
+To update, pull the reviewed TME+ revision, verify the CSS import still points
+to that revision, and refresh the Jellyfin web client. For a reversible
+rollback, remove the TME+ import(s) from Custom CSS and save, or switch the
+base import to a previously reviewed commit. No server, database, Docker, or
+media changes are needed to undo the theme.
+
+### Known limitations and manual checks
+
+- This checkout has automated CSS and documentation checks but no live Jellyfin
+  instance or installed plugin sources. Desktop, tablet, mobile portrait, and
+  mobile landscape require visual verification in the target Jellyfin client.
+- The repository contains verified Media Bar selectors for `#slides-container`
+  and `.homeSectionsContainer`, but not `media-bar-mobile-16-9` or
+  `media-bar-mobile-4-3`. TME+ intentionally does not assume those undocumented
+  hooks exist.
+- CSS can provide the legacy-shell TME+ wordmark treatment, but it does not
+  replace the Modern client's accessible logo asset or alter its DOM.
+- The optional `styles/abyss-lite.css` was inherited from Abyss and has not yet
+  been retuned or validated for the TME+ layer.
+
+## Design system
+
+**Cinematic Obsidian** uses an obsidian base, graphite surfaces, soft-white
+type, low-opacity neutral borders, and violet reserved for active navigation,
+primary actions, progress, selected state, and focus. Cards elevate subtly on
+pointer devices, detail pages prioritize backdrop and title hierarchy, and
+`prefers-reduced-motion` removes nonessential motion. The theme deliberately
+avoids global neon borders, opaque hero panels, and a blur-only visual identity.
+
+## Inherited upstream material
+
+The preview assets, installer scripts, Spotlight material, and legacy sections
+below are inherited from Abyss. They describe upstream behavior and imagery,
+not a validated TME+ release. In particular, do not use the upstream installer
+or its URLs to deploy this fork; follow the TME+ Custom CSS instructions above.
 
 ## Demo Video
 [![Abyss Demo](docs/assets/images/demo-thumbnail.png)](https://youtu.be/CAjI7qgvJzo)

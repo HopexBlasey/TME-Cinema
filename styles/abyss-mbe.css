@@ -128,3 +128,180 @@
         top: calc(50% + 16.5vh) !important;
     }
 }
+
+/* TME+ — Cinematic Obsidian integration for Media Bar Enhanced v1.9.0.0.
+   It styles only documented plugin hooks and leaves slide mechanics untouched. */
+#slides-container,
+#slides-container .detailButton,
+#slides-container .misc-info,
+#slides-container .misc-info *:not(.material-icons),
+#slides-container .plot,
+#slides-container .genre,
+#slides-container .play-text {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+#slides-container {
+    position: relative;
+    isolation: isolate;
+    color: rgb(var(--tme-text));
+}
+
+#slides-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgb(var(--tme-obsidian) / 0.9), rgb(var(--tme-obsidian) / 0.62) 33%, transparent 68%),
+        linear-gradient(0deg, rgb(var(--tme-obsidian) / 0.58), transparent 45%);
+}
+
+#slides-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+#slides-container .detailButton {
+    min-height: 2.75rem;
+    color: rgb(var(--tme-obsidian)) !important;
+    background: var(--tme-gradient-brand) !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--tme-radius-sm) !important;
+    box-shadow: 0 8px 22px rgb(79 52 142 / 0.28);
+    font-weight: 720;
+    letter-spacing: 0.01em;
+}
+
+#slides-container .detailButton:hover {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+}
+
+#slides-container .favorite-button,
+#slides-container .detail-button {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.5rem !important;
+    color: rgb(var(--tme-text)) !important;
+    background: rgb(var(--tme-obsidian) / 0.56) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.2) !important;
+    border-radius: var(--tme-radius-sm) !important;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+#slides-container .favorite-button:hover,
+#slides-container .detail-button:hover {
+    background: rgb(var(--tme-border) / 0.14) !important;
+    border-color: rgb(var(--tme-border) / 0.3) !important;
+}
+
+#slides-container .misc-info {
+    gap: 0.4rem !important;
+}
+
+#slides-container #slide-counter,
+#slides-container .star-rating-container,
+#slides-container .critic-rating,
+#slides-container .age-rating,
+#slides-container .runTime,
+#slides-container .date {
+    min-height: 1.65rem;
+    padding: 0.16rem 0.55rem;
+    color: rgb(var(--tme-text-muted));
+    background: rgb(var(--tme-obsidian) / 0.58);
+    border: 1px solid rgb(var(--tme-border) / 0.13);
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 650;
+    letter-spacing: 0.025em;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+#slides-container #slide-counter {
+    color: rgb(var(--tme-text));
+    border-color: rgb(var(--tme-violet) / 0.4);
+    margin-right: 0;
+}
+
+#slides-container .separator-icon {
+    display: none;
+}
+
+#slides-container .genre {
+    color: rgb(var(--tme-violet-strong)) !important;
+    font-size: 0.82rem;
+    font-weight: 720;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+#slides-container .plot {
+    max-width: min(43rem, 56vw);
+    margin-bottom: 1.25rem !important;
+    color: rgb(var(--tme-text-muted));
+    font-size: clamp(0.94rem, 1.3vw, 1.06rem);
+    font-weight: 450;
+    line-height: 1.55;
+    text-shadow: 0 2px 16px rgb(0 0 0 / 0.6);
+}
+
+#slides-container .button-container {
+    gap: 0.55rem;
+    margin-top: 0.9rem;
+}
+
+#slides-container .arrow {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-obsidian) / 0.45);
+    border: 1px solid rgb(var(--tme-border) / 0.16);
+    border-radius: var(--tme-radius-sm);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+#slides-container .arrow:hover {
+    background: rgb(var(--tme-violet) / 0.28);
+    border-color: rgb(var(--tme-violet) / 0.5);
+}
+
+#slides-container .favorite-button.favorited::before {
+    animation: none;
+    color: rgb(var(--tme-violet-strong)) !important;
+}
+
+@media (max-width: 48rem) {
+    #slides-container::after {
+        background:
+            linear-gradient(0deg, rgb(var(--tme-obsidian) / 0.94), rgb(var(--tme-obsidian) / 0.72) 40%, transparent 74%),
+            linear-gradient(90deg, rgb(var(--tme-obsidian) / 0.38), transparent 75%);
+    }
+
+    #slides-container .plot {
+        max-width: min(34rem, 88vw);
+        font-size: 0.9rem;
+        line-height: 1.45;
+    }
+}
+
+@media (max-height: 30rem) and (orientation: landscape) {
+    #slides-container .plot {
+        max-width: min(44rem, 70vw);
+        margin-bottom: 0.75rem !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #slides-container .detailButton,
+    #slides-container .favorite-button,
+    #slides-container .detail-button,
+    #slides-container .arrow {
+        transition: none;
+    }
+}
