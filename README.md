@@ -54,11 +54,30 @@ the base TME+ import only when the matching enhancement is installed:
 @import url('https://cdn.jsdelivr.net/gh/HopexBlasey/TME-Cinema@main/styles/abyss-mbe.css');
 ```
 
-The styles use only the documented selectors present in this repository:
-`#jellyfin-enhanced-panel`, Jellyfin Enhanced overlay hooks, and Media Bar
-Enhanced's `#slides-container` hooks. They preserve integration functionality;
-they do not add a hero, recommendations, or any data source. Plugin updates may
-rename markup, so re-check these integrations after updating either plugin.
+The integration sheets now cover the verified selector vocabulary supplied from
+your Jellyfin environment: Media Bar's hero/backdrop, compact mobile, settings,
+and progress hooks, plus Jellyfin Enhanced's panel, recommendation, download,
+request, and issue-page hooks. They preserve plugin functionality and do not
+invent data sources. Plugin updates may rename markup, so re-check the styling
+after updating either plugin.
+
+### Modern side rail with JavaScript Injector
+
+For the full TME+ application shell on Jellyfin 12 Modern UI, load the optional
+vanilla script below through your existing JavaScript Injector plugin **after**
+the TME+ CSS has loaded:
+
+```text
+https://raw.githubusercontent.com/HopexBlasey/TME-Cinema/main/scripts/tme-plus/tme-plus.js
+```
+
+The injector does not supply new routes, menus, playback controls, or data. On
+desktop it places Jellyfin's existing Modern header navigation controls in the
+TME+ Obsidian side rail; below `64rem` it returns those same elements to their
+native header. This makes the layout substantially different without relying
+on guessed Jellyfin URLs or duplicate navigation actions. If the Modern UI
+changes its documented MUI structure, disable the script and the standard TME+
+CSS theme will continue to work.
 
 ### Customization
 
@@ -88,12 +107,13 @@ media changes are needed to undo the theme.
 - This checkout has automated CSS and documentation checks but no live Jellyfin
   instance or installed plugin sources. Desktop, tablet, mobile portrait, and
   mobile landscape require visual verification in the target Jellyfin client.
-- The repository contains verified Media Bar selectors for `#slides-container`
-  and `.homeSectionsContainer`, but not `media-bar-mobile-16-9` or
-  `media-bar-mobile-4-3`. TME+ intentionally does not assume those undocumented
-  hooks exist.
+- TME+ includes the supplied Media Bar layout selectors, including
+  `#slides-container`, `.homeSectionsContainer`, `media-bar-mobile-16-9`, and
+  `media-bar-mobile-4-3`. Their placement still needs verification against your
+  installed Media Bar version and device layouts.
 - CSS can provide the legacy-shell TME+ wordmark treatment, but it does not
-  replace the Modern client's accessible logo asset or alter its DOM.
+  replace the Modern client's accessible logo asset without the optional
+  injector.
 - The optional `styles/abyss-lite.css` was inherited from Abyss and has not yet
   been retuned or validated for the TME+ layer.
 

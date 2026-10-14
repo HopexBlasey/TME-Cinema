@@ -3539,3 +3539,395 @@ progress::-moz-progress-bar {
         transition: none !important;
     }
 }
+
+/* --------------------------------------------------------------------------
+   TME+ APPLICATION SHELL
+
+   A deliberate break from the inherited Abyss composition. The optional
+   injector adds .tme-plus-modern-navigation and reuses Jellyfin's own Modern
+   UI nav controls inside this rail; no replacement routes are fabricated.
+   -------------------------------------------------------------------------- */
+
+:root {
+    --tme-rail-width: 15.75rem;
+    --tme-header-height: 4.5rem;
+    --tme-content-max: 112rem;
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html[data-theme="dark"] .backgroundContainer {
+    background: rgb(var(--tme-obsidian)) !important;
+}
+
+/* Make backgrounds feel architectural rather than translucent and pill-like. */
+html[data-theme="dark"] .MuiPaper-root,
+.dialog,
+.toast,
+.mainDrawer,
+.upNextContainer,
+.playerStats-stats,
+.appfooter {
+    background-image: none !important;
+}
+
+html[data-theme="dark"] .MuiAppBar-root,
+.skinHeader,
+.skinHeader.semiTransparent {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] .MuiAppBar-root .MuiToolbar-root,
+.headerTop {
+    min-height: var(--tme-header-height) !important;
+    padding-block: 0.6rem !important;
+}
+
+html[data-theme="dark"] .MuiToolbar-root .MuiIconButton-root,
+.headerButton,
+.paper-icon-button-light {
+    color: rgb(var(--tme-text-muted));
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+html[data-theme="dark"] .MuiToolbar-root .MuiIconButton-root:hover,
+.headerButton:hover,
+.paper-icon-button-light:hover {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-border) / 0.1) !important;
+}
+
+/* The modern desktop rail is activated only by scripts/tme-plus/tme-plus.js. */
+#tme-navigation-rail {
+    display: none;
+}
+
+@media (min-width: 64rem) {
+    html.tme-plus-modern-navigation {
+        --tme-page-inset: clamp(1.5rem, 3vw, 3.5rem);
+    }
+
+    html.tme-plus-modern-navigation #tme-navigation-rail {
+        display: flex;
+        position: fixed;
+        z-index: 1301;
+        inset: 0 auto 0 0;
+        width: var(--tme-rail-width);
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 1.45rem 0.9rem 1rem;
+        overflow-y: auto;
+        color: rgb(var(--tme-text));
+        background: linear-gradient(180deg, rgb(20 20 29 / 0.99), rgb(11 12 17 / 0.99));
+        border-right: 1px solid rgb(var(--tme-border) / 0.1);
+        box-shadow: 16px 0 48px rgb(0 0 0 / 0.22);
+    }
+
+    html.tme-plus-modern-navigation #tme-navigation-rail::after {
+        content: "YOUR WORLD\A YOUR ENTERTAINMENT";
+        margin-top: auto;
+        padding: 1.25rem 0.75rem 0;
+        color: rgb(var(--tme-text-subtle));
+        font-size: 0.58rem;
+        font-weight: 720;
+        letter-spacing: 0.18em;
+        line-height: 1.7;
+        white-space: pre-line;
+    }
+
+    .tme-wordmark {
+        display: inline-flex;
+        align-items: baseline;
+        width: fit-content;
+        margin: 0.1rem 0.75rem 1.6rem;
+        color: rgb(var(--tme-text));
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        line-height: 1;
+    }
+
+    .tme-wordmark-plus {
+        margin-left: 0.08em;
+        color: rgb(var(--tme-violet-strong));
+        font-size: 1.5em;
+        font-weight: 500;
+        letter-spacing: 0;
+    }
+
+    .tme-rail-divider {
+        height: 1px;
+        margin: 0 0.35rem 1rem;
+        background: linear-gradient(90deg, rgb(var(--tme-violet) / 0.75), rgb(var(--tme-border) / 0.04));
+    }
+
+    .tme-navigation-slot {
+        display: block;
+        min-width: 0;
+    }
+
+    .tme-navigation-slot .MuiStack-root,
+    .tme-navigation-slot .MuiButtonGroup-root {
+        display: flex !important;
+        width: 100%;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.22rem !important;
+        overflow: visible !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .tme-navigation-slot .MuiButton-root,
+    .tme-navigation-slot .MuiButtonBase-root,
+    .tme-navigation-slot .MuiIconButton-root {
+        justify-content: flex-start !important;
+        width: 100%;
+        min-height: 2.8rem;
+        padding: 0.68rem 0.78rem !important;
+        color: rgb(var(--tme-text-muted)) !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: var(--tme-radius-sm) !important;
+        box-shadow: none !important;
+        font-size: 0.9rem;
+        font-weight: 610;
+        letter-spacing: 0.005em;
+        text-align: left;
+        text-transform: none;
+    }
+
+    .tme-navigation-slot .MuiButton-root:hover,
+    .tme-navigation-slot .MuiButtonBase-root:hover,
+    .tme-navigation-slot .MuiIconButton-root:hover {
+        color: rgb(var(--tme-text)) !important;
+        background: rgb(var(--tme-border) / 0.075) !important;
+        border-color: rgb(var(--tme-border) / 0.07) !important;
+        transform: none;
+    }
+
+    .tme-navigation-slot .MuiButton-root.Mui-selected,
+    .tme-navigation-slot .MuiButton-root.MuiButton-colorPrimary,
+    .tme-navigation-slot .MuiButtonBase-root[aria-current="page"] {
+        color: rgb(var(--tme-text)) !important;
+        background: linear-gradient(90deg, rgb(var(--tme-violet) / 0.22), rgb(var(--tme-violet) / 0.05)) !important;
+        border-color: rgb(var(--tme-violet) / 0.22) !important;
+    }
+
+    html.tme-plus-modern-navigation header.MuiAppBar-root {
+        left: var(--tme-rail-width);
+        width: calc(100% - var(--tme-rail-width));
+        background: linear-gradient(180deg, rgb(var(--tme-obsidian) / 0.97), rgb(var(--tme-obsidian) / 0.78) 68%, transparent) !important;
+    }
+
+    html.tme-plus-modern-navigation header.MuiAppBar-root::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-bottom: 1px solid rgb(var(--tme-border) / 0.06);
+    }
+
+    html.tme-plus-modern-navigation header.MuiAppBar-root > .MuiToolbar-root {
+        padding-inline: var(--tme-page-inset) !important;
+    }
+
+    html.tme-plus-modern-navigation .tabContent.pageTabContent,
+    html.tme-plus-modern-navigation .pageContainer {
+        box-sizing: border-box;
+        padding-left: calc(var(--tme-rail-width) + var(--tme-page-inset)) !important;
+        padding-right: var(--tme-page-inset) !important;
+    }
+
+    html.tme-plus-modern-navigation .tabContent.pageTabContent {
+        max-width: calc(var(--tme-content-max) + var(--tme-rail-width));
+    }
+
+    html.tme-plus-modern-navigation #indexPage .homeSectionsContainer,
+    html.tme-plus-modern-navigation #favoritesTab {
+        max-width: var(--tme-content-max);
+        margin-inline: auto;
+    }
+}
+
+/* Legacy navigation is a full-height side surface instead of Abyss's floating pill. */
+@media (min-width: 64rem) {
+    .mainDrawer {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: var(--tme-rail-width) !important;
+        padding: 1.25rem 0.75rem !important;
+        color: rgb(var(--tme-text));
+        background: linear-gradient(180deg, rgb(20 20 29), rgb(11 12 17)) !important;
+        border: 0 !important;
+        border-right: 1px solid rgb(var(--tme-border) / 0.1) !important;
+        border-radius: 0 !important;
+        box-shadow: 16px 0 48px rgb(0 0 0 / 0.22) !important;
+    }
+
+    .mainDrawer .navMenuOption,
+    .mainDrawer .listItem {
+        min-height: 2.8rem;
+        margin: 0.15rem 0;
+        border-radius: var(--tme-radius-sm) !important;
+    }
+}
+
+/* Content is organized as editorial shelves, not cards floating on glass. */
+.homeSectionsContainer .verticalSection,
+#favoritesTab .verticalSection,
+.readOnlyContent .verticalSection {
+    padding-top: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.homeSectionsContainer .sectionTitle,
+#favoritesTab .sectionTitle,
+.verticalSection .sectionTitle {
+    display: flex;
+    align-items: center;
+    min-height: 1.8rem;
+    margin-bottom: 1rem !important;
+    color: rgb(var(--tme-text)) !important;
+    font-size: clamp(1.15rem, 1.6vw, 1.48rem);
+    font-weight: 720;
+    letter-spacing: -0.03em;
+}
+
+.homeSectionsContainer .sectionTitle::before,
+#favoritesTab .sectionTitle::before {
+    content: "";
+    width: 0.24rem;
+    height: 1.2em;
+    margin-right: 0.65rem;
+    border-radius: 99px;
+    background: linear-gradient(180deg, rgb(var(--tme-violet-strong)), rgb(var(--tme-violet-deep)));
+}
+
+.homeSectionsContainer .verticalSection:has([data-type="CollectionFolder"]) .cardText {
+    display: block !important;
+}
+
+.cardBox-bottompadded {
+    margin-bottom: 1.1rem !important;
+}
+
+.cardImageContainer,
+.cardPadder,
+.visualCardBox {
+    border-radius: var(--tme-radius-sm) !important;
+}
+
+.cardImageContainer {
+    background: rgb(var(--tme-surface)) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.09) !important;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.18) !important;
+}
+
+.card:hover .cardImageContainer {
+    border-color: rgb(var(--tme-violet) / 0.58) !important;
+    box-shadow: 0 18px 34px rgb(0 0 0 / 0.38) !important;
+}
+
+.cardOverlayContainer {
+    background: linear-gradient(180deg, transparent 42%, rgb(7 8 12 / 0.88)) !important;
+    border-radius: var(--tme-radius-sm) !important;
+}
+
+.cardText {
+    padding: 0.55rem 0.1rem 0 !important;
+    color: rgb(var(--tme-text-muted)) !important;
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
+.cardText-first {
+    color: rgb(var(--tme-text)) !important;
+    font-size: 0.93rem !important;
+    font-weight: 650;
+}
+
+/* Detail pages become a single readable cinematic column. */
+#itemDetailPage .detailPageContent,
+#itemDetailPage .detailPagePrimaryContainer,
+#itemDetailPage .detailPageSecondaryContainer {
+    max-width: var(--tme-content-max);
+}
+
+#itemDetailPage .detailPagePrimaryContainer {
+    position: relative;
+}
+
+#itemDetailPage .detailPagePrimaryContainer::before {
+    content: "";
+    position: absolute;
+    inset: -2rem -2rem auto;
+    height: min(34rem, 65vh);
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(var(--tme-obsidian)) 0%, rgb(var(--tme-obsidian) / 0.66) 46%, rgb(var(--tme-obsidian) / 0.08)), linear-gradient(0deg, rgb(var(--tme-obsidian)), transparent 58%);
+}
+
+#itemDetailPage .itemName {
+    max-width: 14ch;
+    color: rgb(var(--tme-text)) !important;
+    font-size: clamp(2.4rem, 5vw, 5.5rem);
+    font-weight: 780;
+    letter-spacing: -0.06em;
+}
+
+#itemDetailPage .overview {
+    max-width: 48rem;
+    color: rgb(var(--tme-text-muted)) !important;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+#itemDetailPage .btnPlay {
+    min-height: 3rem;
+    padding-inline: 1.25rem !important;
+    border-radius: var(--tme-radius-sm) !important;
+}
+
+/* Strong but small states help with everyday remote, mouse, touch, and keyboard use. */
+.itemProgressBar,
+.backgroundProgress > div {
+    height: 0.24rem !important;
+    border-radius: 99px;
+    background: rgb(var(--tme-border) / 0.16) !important;
+}
+
+.itemProgressBarForeground,
+.playbackProgress > div {
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgb(var(--tme-violet-deep)), rgb(var(--tme-violet-strong))) !important;
+}
+
+.indicator,
+.countIndicator,
+.mediaSourceIndicator,
+.innerCardFooter {
+    border-radius: 0.35rem !important;
+}
+
+@media (max-width: 63.99rem) {
+    .skinHeader,
+    html[data-theme="dark"] header.MuiAppBar-root {
+        background: linear-gradient(180deg, rgb(var(--tme-obsidian) / 0.94), transparent) !important;
+    }
+
+    .homeSectionsContainer .sectionTitle,
+    #favoritesTab .sectionTitle {
+        font-size: 1.08rem;
+    }
+
+    #itemDetailPage .itemName {
+        font-size: clamp(2.1rem, 10vw, 3.35rem);
+    }
+}

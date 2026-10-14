@@ -6,6 +6,7 @@ const theme = await readFile(new URL('../abyss.css', import.meta.url), 'utf8');
 const lite = await readFile(new URL('../styles/abyss-lite.css', import.meta.url), 'utf8');
 const mediaBar = await readFile(new URL('../styles/abyss-mbe.css', import.meta.url), 'utf8');
 const enhanced = await readFile(new URL('../styles/abyss-je.css', import.meta.url), 'utf8');
+const injector = await readFile(new URL('../scripts/tme-plus/tme-plus.js', import.meta.url), 'utf8');
 
 test('global inherited properties do not match every element', () => {
   assert.doesNotMatch(theme, /\*\s*{\s*scrollbar-color:/);
@@ -90,5 +91,32 @@ test('TME+ design layer centralizes Cinematic Obsidian tokens and preserves supp
   assert.match(mediaBar, /#slides-container/);
   assert.match(enhanced, /TME\+ — Cinematic Obsidian integration for Jellyfin Enhanced v11\.3\.0\.0/);
   assert.match(enhanced, /#jellyfin-enhanced-panel/);
-  assert.doesNotMatch(mediaBar, /media-bar-mobile-(?:16-9|4-3)/);
+  assert.match(mediaBar, /media-bar-mobile-16-9/);
+  assert.match(mediaBar, /media-bar-mobile-4-3/);
+});
+
+test('TME+ modern shell reuses native navigation instead of inventing application routes', () => {
+  assert.match(theme, /TME\+ APPLICATION SHELL/);
+  assert.match(theme, /#tme-navigation-rail/);
+  assert.match(injector, /header\.MuiAppBar-root > \.MuiToolbar-root > \.MuiStack-root:first-of-type/);
+  assert.match(injector, /restoreNavigation/);
+  assert.match(injector, /DESKTOP_QUERY/);
+  assert.doesNotMatch(injector, /window\.location|history\.pushState|fetch\(/);
+});
+
+test('TME+ enhances supplied Media Bar and Jellyfin Enhanced page hooks', () => {
+  for (const selector of [
+    '.backdrop-container',
+    '.media-bar-settings-popup',
+    '.media-bar-progress-fill',
+    '.je-downloads-page',
+    '.je-request-card',
+    '.je-issue-card',
+    '.je-recommendations-category-header',
+    '.je-genre-tile-image'
+  ]) {
+    const source = selector.startsWith('.je-') ? enhanced : mediaBar;
+    assert.match(source, new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+  assert.match(mediaBar, /prefers-reduced-motion/);
 });

@@ -246,3 +246,590 @@
         border-radius: var(--tme-radius-sm);
     }
 }
+
+/* --------------------------------------------------------------------------
+   TME+ ENHANCED PAGES
+   Selector coverage is based on the Jellyfin Enhanced recommendation and ARR
+   request/download styles supplied with this project. The feature logic stays
+   plugin-owned; this sheet supplies a cohesive Obsidian presentation only.
+   -------------------------------------------------------------------------- */
+
+/* Recommendation discovery */
+[dir="ltr"] .je-pad-left {
+    padding-left: max(clamp(1rem, 3vw, 3.75rem), env(safe-area-inset-left)) !important;
+}
+
+[dir="ltr"] .je-pad-right {
+    padding-right: max(clamp(1rem, 3vw, 3.75rem), env(safe-area-inset-right)) !important;
+}
+
+[dir="rtl"] .je-pad-left {
+    padding-right: max(clamp(1rem, 3vw, 3.75rem), env(safe-area-inset-right)) !important;
+}
+
+[dir="rtl"] .je-pad-right {
+    padding-left: max(clamp(1rem, 3vw, 3.75rem), env(safe-area-inset-left)) !important;
+}
+
+#je-recommendations-category-page,
+#je-recommendations-category-page > [data-role="content"],
+#je-recommendations-category-page .content-primary.je-recommendations-category-page,
+.content-primary.je-recommendations-category-page {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-obsidian));
+}
+
+.je-recommendations-category-header {
+    position: sticky;
+    top: var(--tme-header-height);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 4.5rem;
+    margin: 0 !important;
+    padding: 0.9rem clamp(1rem, 3vw, 3.75rem) !important;
+    color: rgb(var(--tme-text));
+    background: linear-gradient(180deg, rgb(var(--tme-obsidian) / 0.97), rgb(var(--tme-obsidian) / 0.84));
+    border-bottom: 1px solid rgb(var(--tme-border) / 0.08);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.je-recommendations-category-header h1 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+    font-weight: 750;
+    letter-spacing: -0.035em;
+}
+
+.je-recommendations-category-header #je-recommendations-category-back {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-border) / 0.07);
+    border: 1px solid rgb(var(--tme-border) / 0.12);
+    border-radius: var(--tme-radius-sm);
+}
+
+.je-recommendations-category-header #je-recommendations-category-back:hover {
+    background: rgb(var(--tme-violet) / 0.22);
+    border-color: rgb(var(--tme-violet) / 0.38);
+}
+
+.je-tile-image,
+.je-genre-tile-image {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgb(var(--tme-surface-raised)), rgb(var(--tme-graphite))) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.1);
+    border-radius: var(--tme-radius-sm);
+    box-shadow: 0 8px 22px rgb(0 0 0 / 0.2);
+}
+
+.je-tile-image {
+    display: grid;
+    place-items: center;
+    padding: 1.1rem;
+}
+
+.je-tile-logo {
+    max-width: 86%;
+    max-height: 78%;
+    object-fit: contain;
+    filter: grayscale(0.15) brightness(1.08);
+}
+
+.je-tile-fallback-text {
+    color: rgb(var(--tme-text));
+    font-weight: 720;
+    text-align: center;
+}
+
+.je-genre-tile-image {
+    display: grid;
+    place-items: center;
+    min-height: 8.5rem;
+    isolation: isolate;
+}
+
+.je-genre-tile-backdrop {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.36;
+    filter: saturate(0.65) contrast(1.14);
+}
+
+.je-genre-tile-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgb(var(--tme-obsidian) / 0.46), rgb(var(--tme-violet-deep) / 0.28));
+    pointer-events: none;
+}
+
+.je-genre-tile-title {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0.75rem;
+    color: rgb(var(--tme-text));
+    font-size: clamp(1.1rem, 2.1vw, 1.75rem);
+    font-weight: 760;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    text-align: center;
+    text-shadow: 0 4px 16px rgb(0 0 0 / 0.45);
+}
+
+.je-tile-image:hover,
+.je-genre-tile-image:hover {
+    border-color: rgb(var(--tme-violet) / 0.5);
+    box-shadow: 0 18px 34px rgb(0 0 0 / 0.34);
+    transform: translateY(-2px);
+}
+
+/* Download and request operations */
+.je-downloads-page {
+    max-width: var(--tme-content-max);
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 3rem) !important;
+    color: rgb(var(--tme-text));
+}
+
+.je-downloads-section,
+.je-issues-section {
+    margin-bottom: clamp(1.75rem, 4vw, 3.5rem);
+}
+
+.je-downloads-section h2,
+.je-issues-section h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1rem;
+    color: rgb(var(--tme-text));
+    font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+    font-weight: 740;
+    letter-spacing: -0.025em;
+}
+
+.je-downloads-section h2::before,
+.je-issues-section h2::before {
+    content: "";
+    width: 0.24rem;
+    height: 1.1em;
+    border-radius: 99px;
+    background: var(--tme-gradient-brand);
+}
+
+.je-downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 0.9rem;
+}
+
+.je-download-card,
+.je-request-card,
+.je-issue-card {
+    color: rgb(var(--tme-text));
+    background: linear-gradient(145deg, rgb(var(--tme-surface) / 0.96), rgb(var(--tme-graphite) / 0.96)) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.1);
+    border-radius: var(--tme-radius-md);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.16);
+}
+
+.je-download-card {
+    overflow: hidden;
+}
+
+.je-download-card-content,
+.je-request-card,
+.je-issue-card {
+    display: flex;
+    gap: 0.95rem;
+    padding: 1rem;
+}
+
+.je-request-card,
+.je-issue-card {
+    overflow: visible;
+}
+
+.je-download-card:hover,
+.je-request-card:hover,
+.je-issue-card:hover {
+    border-color: rgb(var(--tme-violet) / 0.38);
+    box-shadow: 0 16px 32px rgb(0 0 0 / 0.28);
+}
+
+.je-download-poster,
+.je-request-poster {
+    flex: 0 0 auto;
+    object-fit: cover;
+    background: rgb(var(--tme-surface-raised));
+    border: 1px solid rgb(var(--tme-border) / 0.1);
+    border-radius: calc(var(--tme-radius-sm) - 2px);
+}
+
+.je-download-poster {
+    width: 4.35rem;
+    height: 6.55rem;
+}
+
+.je-request-poster {
+    width: 4.85rem;
+    height: 7.25rem;
+    max-height: 7.25rem;
+}
+
+.je-download-poster.placeholder,
+.je-request-poster.placeholder {
+    display: grid;
+    place-items: center;
+    color: rgb(var(--tme-text-subtle));
+    background: rgb(var(--tme-border) / 0.06);
+    opacity: 1;
+}
+
+.je-download-info,
+.je-request-info,
+.je-issue-info {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.je-download-title,
+.je-request-title,
+.je-issue-title {
+    overflow: hidden;
+    color: rgb(var(--tme-text));
+    font-weight: 680;
+    letter-spacing: -0.01em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.je-download-subtitle,
+.je-request-year,
+.je-issue-summary,
+.je-request-meta,
+.je-download-stats {
+    color: rgb(var(--tme-text-muted));
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+
+.je-download-meta,
+.je-request-meta,
+.je-request-meta-left,
+.je-issue-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.je-download-meta {
+    margin-top: auto;
+}
+
+.je-request-header,
+.je-issue-title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.65rem;
+    min-width: 0;
+}
+
+.je-request-header > div:first-child {
+    min-width: 0;
+    flex: 1;
+}
+
+.je-request-title-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.je-request-title-link:hover {
+    color: rgb(var(--tme-violet-strong));
+    text-decoration: none;
+}
+
+.je-download-badge,
+.je-request-status,
+.je-requests-status-chip,
+.je-issue-status-chip,
+.je-issue-type-chip,
+.je-release-date-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.55rem;
+    padding: 0.15rem 0.52rem;
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-border) / 0.08);
+    border: 1px solid rgb(var(--tme-border) / 0.12);
+    border-radius: 999px;
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.je-requests-status-chip.je-chip-available,
+.je-issue-status-resolved {
+    color: rgb(202 249 219);
+    background: rgb(52 176 104 / 0.16);
+    border-color: rgb(77 206 130 / 0.34);
+}
+
+.je-requests-status-chip.je-chip-partial,
+.je-requests-status-chip.je-chip-pending,
+.je-issue-status-open {
+    color: rgb(255 233 185);
+    background: rgb(199 144 41 / 0.16);
+    border-color: rgb(232 183 85 / 0.34);
+}
+
+.je-requests-status-chip.je-chip-processing,
+.je-requests-status-chip.je-chip-requested,
+.je-requests-status-chip.je-chip-coming-soon {
+    color: rgb(228 218 255);
+    background: rgb(var(--tme-violet) / 0.16);
+    border-color: rgb(var(--tme-violet) / 0.34);
+}
+
+.je-requests-status-chip.je-chip-rejected,
+.je-requests-status-chip.je-chip-declined,
+.je-requests-status-chip.je-chip-blocklisted,
+.je-requests-status-chip.je-chip-deleted {
+    color: rgb(255 210 215);
+    background: rgb(var(--tme-danger) / 0.16);
+    border-color: rgb(var(--tme-danger) / 0.34);
+}
+
+.je-download-progress-container {
+    padding: 0 1rem 1rem;
+}
+
+.je-download-progress {
+    height: 0.3rem;
+    overflow: hidden;
+    background: rgb(var(--tme-border) / 0.12);
+    border-radius: 99px;
+}
+
+.je-download-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, rgb(var(--tme-violet-deep)), rgb(var(--tme-violet-strong)));
+    border-radius: inherit;
+    transition: width var(--tme-duration) var(--tme-ease);
+}
+
+.je-requests-tabs,
+.je-issues-tabs,
+.je-downloads-tabs {
+    display: flex;
+    gap: 0.32rem;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.3rem;
+    overflow-x: auto;
+    background: rgb(var(--tme-border) / 0.055);
+    border: 1px solid rgb(var(--tme-border) / 0.08);
+    border-radius: var(--tme-radius-md);
+}
+
+.je-requests-tab.emby-button,
+.je-issues-tab.emby-button,
+.je-downloads-tab.emby-button {
+    min-height: 2.3rem;
+    padding: 0.45rem 0.75rem;
+    color: rgb(var(--tme-text-muted));
+    background: transparent !important;
+    border: 1px solid transparent;
+    border-radius: calc(var(--tme-radius-sm) - 2px);
+    font-size: 0.82rem;
+    font-weight: 650;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.je-requests-tab.emby-button:hover,
+.je-issues-tab.emby-button:hover,
+.je-downloads-tab.emby-button:hover {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-border) / 0.08) !important;
+}
+
+.je-requests-tab.emby-button.active,
+.je-issues-tab.emby-button.active,
+.je-downloads-tab.emby-button.active {
+    color: rgb(var(--tme-obsidian));
+    background: var(--tme-gradient-brand) !important;
+    border-color: transparent;
+}
+
+.je-downloads-tab-count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.1rem;
+    height: 1.1rem;
+    margin-left: 0.35rem;
+    color: inherit;
+    background: rgb(var(--tme-obsidian) / 0.16);
+    border-radius: 99px;
+    font-size: 0.64rem;
+}
+
+.je-downloads-search-container {
+    position: relative;
+    margin: 0 0 1rem;
+}
+
+.je-downloads-search-input {
+    width: min(28rem, 100%);
+    min-height: 2.65rem;
+    padding: 0.55rem 0.85rem 0.55rem 2.55rem;
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-graphite)) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.13);
+    border-radius: var(--tme-radius-sm);
+}
+
+.je-downloads-search-input:focus {
+    border-color: rgb(var(--tme-violet)) !important;
+    box-shadow: var(--tme-focus-ring);
+}
+
+.je-downloads-search-icon {
+    color: rgb(var(--tme-text-subtle));
+}
+
+.je-request-watch-btn,
+.je-request-approve-btn,
+.je-request-decline-btn,
+.je-issue-view-btn,
+.je-request-external-link {
+    display: inline-grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    padding: 0;
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-border) / 0.08) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.12) !important;
+    border-radius: var(--tme-radius-sm) !important;
+    box-shadow: none;
+}
+
+.je-request-watch-btn:hover,
+.je-issue-view-btn:hover,
+.je-request-external-link:hover {
+    background: rgb(var(--tme-violet) / 0.2) !important;
+    border-color: rgb(var(--tme-violet) / 0.34) !important;
+}
+
+.je-request-approve-btn {
+    color: rgb(202 249 219);
+    background: rgb(52 176 104 / 0.16) !important;
+    border-color: rgb(77 206 130 / 0.3) !important;
+}
+
+.je-request-decline-btn {
+    color: rgb(255 210 215);
+    background: rgb(var(--tme-danger) / 0.16) !important;
+    border-color: rgb(var(--tme-danger) / 0.3) !important;
+}
+
+.je-request-avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: cover;
+    border: 1px solid rgb(var(--tme-border) / 0.18);
+    border-radius: 50%;
+}
+
+.je-empty-state,
+.je-loading,
+.je-issue-message {
+    padding: 2.25rem 1rem;
+    color: rgb(var(--tme-text-muted));
+    text-align: center;
+}
+
+.je-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+}
+
+.je-pagination .emby-button {
+    min-width: 2.35rem;
+    min-height: 2.35rem;
+    color: rgb(var(--tme-text-muted));
+    background: rgb(var(--tme-border) / 0.06) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.1);
+    border-radius: var(--tme-radius-sm);
+}
+
+.je-pagination .emby-button:hover:not(:disabled) {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-violet) / 0.18) !important;
+    border-color: rgb(var(--tme-violet) / 0.32);
+}
+
+.je-pagination .emby-button:disabled,
+.je-request-approve-btn:disabled,
+.je-request-decline-btn:disabled,
+.je-issue-view-btn.is-disabled {
+    opacity: 0.36;
+    cursor: not-allowed;
+}
+
+@media (max-width: 42rem) {
+    .je-downloads-page {
+        padding: 1rem !important;
+    }
+
+    .je-downloads-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .je-download-card-content,
+    .je-request-card,
+    .je-issue-card {
+        gap: 0.75rem;
+        padding: 0.8rem;
+    }
+
+    .je-download-poster {
+        width: 3.8rem;
+        height: 5.7rem;
+    }
+
+    .je-request-poster {
+        width: 4.1rem;
+        height: 6.15rem;
+    }
+
+    .je-recommendations-category-header {
+        top: 0;
+        padding-inline: 1rem !important;
+    }
+}
