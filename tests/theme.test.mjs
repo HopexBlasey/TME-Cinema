@@ -4,6 +4,8 @@ import test from 'node:test';
 
 const theme = await readFile(new URL('../abyss.css', import.meta.url), 'utf8');
 const lite = await readFile(new URL('../styles/abyss-lite.css', import.meta.url), 'utf8');
+const mediaBar = await readFile(new URL('../styles/abyss-mbe.css', import.meta.url), 'utf8');
+const enhanced = await readFile(new URL('../styles/abyss-je.css', import.meta.url), 'utf8');
 
 test('global inherited properties do not match every element', () => {
   assert.doesNotMatch(theme, /\*\s*{\s*scrollbar-color:/);
@@ -65,4 +67,28 @@ test('lite override lowers rendering cost without replacing the theme', () => {
   assert.match(lite, /--abyss-glass-blur:/);
   assert.match(lite, /animation:\s*none/);
   assert.ok(lite.length < 3000, 'lite mode should remain a small override');
+});
+
+test('TME+ design layer centralizes Cinematic Obsidian tokens and preserves supported integration hooks', () => {
+  for (const token of [
+    '--tme-obsidian:',
+    '--tme-surface:',
+    '--tme-violet:',
+    '--tme-radius-md:',
+    '--tme-space-3:',
+    '--tme-shadow-card:',
+    '--tme-gradient-brand:',
+    '--tme-duration:',
+    '--tme-focus-ring:'
+  ]) {
+    assert.match(theme, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+  assert.match(theme, /TME\+ — CINEMATIC OBSIDIAN/);
+  assert.match(theme, /:focus-visible/);
+  assert.match(theme, /prefers-reduced-motion/);
+  assert.match(mediaBar, /TME\+ — Cinematic Obsidian integration for Media Bar Enhanced v1\.9\.0\.0/);
+  assert.match(mediaBar, /#slides-container/);
+  assert.match(enhanced, /TME\+ — Cinematic Obsidian integration for Jellyfin Enhanced v11\.3\.0\.0/);
+  assert.match(enhanced, /#jellyfin-enhanced-panel/);
+  assert.doesNotMatch(mediaBar, /media-bar-mobile-(?:16-9|4-3)/);
 });

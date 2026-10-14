@@ -129,3 +129,120 @@
 .cardImageContainer .cardIndicators~.genre-overlay-container {
     margin-top: clamp(24px, 7vw, 38px);
 }
+
+/* TME+ — Cinematic Obsidian integration for Jellyfin Enhanced v11.3.0.0.
+   These rules deliberately style the enhancement's existing panel and overlay
+   hooks; they do not recreate any Jellyfin Enhanced functionality. */
+#jellyfin-enhanced-panel,
+.je-bm-player-modal-container {
+    color: rgb(var(--tme-text));
+    background: var(--tme-gradient-surface) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.12) !important;
+    border-radius: var(--tme-radius-lg) !important;
+    box-shadow: var(--tme-shadow-overlay);
+    -webkit-backdrop-filter: blur(14px) saturate(115%);
+    backdrop-filter: blur(14px) saturate(115%);
+}
+
+#jellyfin-enhanced-panel {
+    margin: 1.5rem 0;
+}
+
+#jellyfin-enhanced-panel > div:first-of-type,
+#jellyfin-enhanced-panel .panel-main-content {
+    background: transparent !important;
+}
+
+#jellyfin-enhanced-panel .tabs {
+    display: flex;
+    gap: 0.2rem;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0.35rem !important;
+    background: rgb(var(--tme-obsidian) / 0.56);
+    border: 1px solid rgb(var(--tme-border) / 0.1);
+    border-radius: var(--tme-radius-md);
+    box-shadow: none;
+}
+
+#jellyfin-enhanced-panel .tab-button {
+    color: rgb(var(--tme-text-muted));
+    border: 1px solid transparent;
+    border-radius: var(--tme-radius-sm);
+    white-space: nowrap;
+}
+
+#jellyfin-enhanced-panel .tab-button:hover {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-border) / 0.08) !important;
+}
+
+#jellyfin-enhanced-panel .tab-button.active {
+    color: rgb(var(--tme-obsidian)) !important;
+    background: var(--tme-gradient-brand) !important;
+    border-color: transparent;
+}
+
+#jellyfin-enhanced-panel h3,
+#jellyfin-enhanced-panel summary {
+    color: rgb(var(--tme-text)) !important;
+    border-bottom-color: rgb(var(--tme-border) / 0.12) !important;
+}
+
+#jellyfin-enhanced-panel #clearTranslationCacheButton,
+#jellyfin-enhanced-panel #releaseNotesBtn {
+    color: rgb(var(--tme-obsidian));
+    background: var(--tme-gradient-brand) !important;
+    border-color: transparent !important;
+    border-radius: var(--tme-radius-sm);
+}
+
+#jellyfin-enhanced-panel div[style*="border-left"],
+#jellyfin-enhanced-panel .style-preset[style*="border: 2px solid"] {
+    border-color: rgb(var(--tme-violet)) !important;
+    border-left-color: rgb(var(--tme-violet-strong)) !important;
+}
+
+#jellyfin-enhanced-panel input[type="checkbox"],
+#jellyfin-enhanced-panel input[type="range"] {
+    accent-color: rgb(var(--tme-violet-strong)) !important;
+}
+
+#jellyfin-enhanced-panel div[style*="background: #00A4DC"] {
+    background: var(--tme-gradient-brand) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.genre-overlay-container *,
+.rating-overlay-container *,
+.quality-overlay-container *,
+.language-overlay-container * {
+    border-radius: var(--tme-radius-sm) !important;
+}
+
+.genre-overlay-container .genre-tag,
+.quality-overlay-label {
+    color: rgb(var(--tme-text));
+    background: rgb(var(--tme-obsidian) / 0.72) !important;
+    border: 1px solid rgb(var(--tme-border) / 0.14);
+    box-shadow: none !important;
+}
+
+.language-overlay-container,
+.quality-overlay-container,
+.rating-overlay-container,
+.genre-overlay-container {
+    border-radius: var(--tme-radius-sm) !important;
+}
+
+@media (max-width: 42rem) {
+    #jellyfin-enhanced-panel {
+        margin: 1rem 0;
+        border-radius: var(--tme-radius-md) !important;
+    }
+
+    #jellyfin-enhanced-panel .tabs {
+        border-radius: var(--tme-radius-sm);
+    }
+}
